@@ -213,33 +213,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
 // ==========================================
-// LÓGICA DO CARROSSEL E MODAL
+// LÓGICA DO CARROSSEL E MODAL (CORRIGIDA)
 // ==========================================
 
 let slideIndex = 0;
-const slides = document.getElementsByClassName("carousel-slide");
-const track = document.getElementById("carouselTrack");
-const dotsContainer = document.getElementById("carouselDots");
+
+function obterElementosCarrossel() {
+    return {
+        slides: document.getElementsByClassName("carousel-slide"),
+        track: document.getElementById("carouselTrack"),
+        dotsContainer: document.getElementById("carouselDots")
+    };
+}
 
 function inicializarCarrossel() {
+    const { slides, track, dotsContainer } = obterElementosCarrossel();
     if (!track || slides.length === 0) return;
     
-    // Cria as bolinhas indicadoras dinamicamente
-    dotsContainer.innerHTML = "";
-    for (let i = 0; i < slides.length; i++) {
-        const dot = document.createElement("span");
-        dot.classList.add("dot");
-        if (i === 0) dot.classList.add("active");
-        dot.onclick = () => irParaSlide(i);
-        dotsContainer.appendChild(dot);
+    // Gera as bolinhas indicadoras
+    if (dotsContainer) {
+        dotsContainer.innerHTML = "";
+        for (let i = 0; i < slides.length; i++) {
+            const dot = document.createElement("span");
+            dot.classList.add("dot");
+            if (i === 0) dot.classList.add("active");
+            dot.onclick = () => irParaSlide(i);
+            dotsContainer.appendChild(dot);
+        }
     }
+    atualizarCarrossel();
 }
 
 function atualizarCarrossel() {
-    if (!track) return;
+    const { slides, track } = obterElementosCarrossel();
+    if (!track || slides.length === 0) return;
+
+    // Garante que o índice fique dentro dos limites
+    if (slideIndex >= slides.length) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = slides.length - 1;
+
+    // Move o trilho de imagens
     track.style.transform = `translateX(-${slideIndex * 100}%)`;
     
-    // Atualiza estado das bolinhas
+    // Atualiza as bolinhas ativas
     const dots = document.getElementsByClassName("dot");
     for (let i = 0; i < dots.length; i++) {
         dots[i].classList.remove("active");
@@ -249,31 +265,59 @@ function atualizarCarrossel() {
     }
 }
 
-function mudarSlide(direcao) {
+// Declaradas no escopo global para o onclick do HTML encontrar
+window.mudarSlide = function(direcao) {
+    const { slides } = obterElementosCarrossel();
+    if (slides.length === 0) return;
+    
     slideIndex += direcao;
-    if (slideIndex >= slides.length) slideIndex = 0;
-    if (slideIndex < 0) slideIndex = slides.length - 1;
     atualizarCarrossel();
-}
+};
 
-function irParaSlide(index) {
+window.irParaSlide = function(index) {
     slideIndex = index;
     atualizarCarrossel();
-}
+};
 
-// Funções para expandir a imagem (Modal)
-function abrirModal(src) {
+window.abrirModal = function(src) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("imgModalExpanded");
-    modal.style.display = "flex";
-    modalImg.src = src;
-}
+    if (modal && modalImg) {
+        modal.style.display = "flex";
+        modalImg.src = src;
+    }
+};
 
-function fecharModal() {
-    document.getElementById("imageModal").style.display = "none";
-}
+window.fecharModal = function() {
+    const modal = document.getElementById("imageModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+};
 
-// Inicializa o carrossel assim que o DOM estiver carregado
-document.addEventListener("DOMContentLoaded", () => {
+// ==========================================
+// VINCULAÇÃO DOS EVENTOS (DOM LOADED)
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa o carrossel
     inicializarCarrossel();
+
+    // Outras inicializações (Máscaras de Moeda e Telefone)
+    const camposMoeda = ['renda', 'valorImovel', 'valorEntrada'];
+    camposMoeda.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            if (input.value && !input.value.startsWith('R$')) {
+                let num = parseFloat(input.value) || 0;
+                input.value = num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            }
+            input.addEventListener('input', (e) => aplicarMascaraMoeda(e.target));
+        }
+    });
+
+    const inputTelefone = document.getElementById('telefone');
+    if (inputTelefone) {
+        inputTelefone.addEventListener('input', (e) => aplicarMascaraTelefone(e.target));
+    }
 });
