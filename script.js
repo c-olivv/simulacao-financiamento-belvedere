@@ -211,4 +211,69 @@ document.addEventListener('DOMContentLoaded', () => {
     if (inputTelefone) {
         inputTelefone.addEventListener('input', (e) => aplicarMascaraTelefone(e.target));
     }
+    
+// ==========================================
+// LÓGICA DO CARROSSEL E MODAL
+// ==========================================
+
+let slideIndex = 0;
+const slides = document.getElementsByClassName("carousel-slide");
+const track = document.getElementById("carouselTrack");
+const dotsContainer = document.getElementById("carouselDots");
+
+function inicializarCarrossel() {
+    if (!track || slides.length === 0) return;
+    
+    // Cria as bolinhas indicadoras dinamicamente
+    dotsContainer.innerHTML = "";
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+        dot.onclick = () => irParaSlide(i);
+        dotsContainer.appendChild(dot);
+    }
+}
+
+function atualizarCarrossel() {
+    if (!track) return;
+    track.style.transform = `translateX(-${slideIndex * 100}%)`;
+    
+    // Atualiza estado das bolinhas
+    const dots = document.getElementsByClassName("dot");
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("active");
+    }
+    if (dots[slideIndex]) {
+        dots[slideIndex].classList.add("active");
+    }
+}
+
+function mudarSlide(direcao) {
+    slideIndex += direcao;
+    if (slideIndex >= slides.length) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = slides.length - 1;
+    atualizarCarrossel();
+}
+
+function irParaSlide(index) {
+    slideIndex = index;
+    atualizarCarrossel();
+}
+
+// Funções para expandir a imagem (Modal)
+function abrirModal(src) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("imgModalExpanded");
+    modal.style.display = "flex";
+    modalImg.src = src;
+}
+
+function fecharModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+// Inicializa o carrossel assim que o DOM estiver carregado
+document.addEventListener("DOMContentLoaded", () => {
+    inicializarCarrossel();
 });
