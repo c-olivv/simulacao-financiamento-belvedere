@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Financiamento Imobiliário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Simulador de Financiamento</h2>
+    
+    <form id="formSimulacao" onsubmit="processarSimulacao(event)">
+        <!-- CAMPO OCULTO: Altere o value para o nome do imóvel/empreendimento específico -->
+        <input type="hidden" id="imovelReferencia" value="Residencial Flores - Apto 302">
+
+        <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" required placeholder="Digite seu nome">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" required placeholder="seu@email.com">
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone / WhatsApp</label>
+                <input type="tel" id="telefone" required placeholder="(24) 99999-9999" pattern="\(?[0-9]{2}\)?\s?[0-9]{4,5}-?[0-9]{4}">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="renda">Renda Mensal (R$)</label>
+                <input type="text" id="renda" required placeholder="R$ 0,00">
+            </div>
+            <div class="form-group">
+                <label for="valorImovel">Valor do Imóvel (R$)</label>
+                <input type="text" id="valorImovel" required placeholder="R$ 0,00">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="valorEntrada">Valor da Entrada (R$)</label>
+                <input type="text" id="valorEntrada" required placeholder="R$ 0,00">
+            </div>
+            <div class="form-group">
+                <label for="prazoAnos">Prazo (Anos)</label>
+                <input type="number" id="prazoAnos" value="30" min="1" max="35" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="sistema">Sistema de Amortização</label>
+                <select id="sistema">
+                    <option value="SAC">SAC (Parcelas Decrescentes)</option>
+                    <option value="PRICE">PRICE (Parcelas Fixas)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="taxaAnual">Taxa de Juros Anual (%)</label>
+                <input type="number" id="taxaAnual" step="0.01" value="9.5" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Simular Agora</button>
+    </form>
+
+    <div id="resultado">
+        <h3>Resultado da Simulação</h3>
+        <div class="cards-grid" id="cardsContainer"></div>
+        <a id="linkWhatsapp" class="cta-whatsapp" target="_blank" rel="noopener noreferrer">Falar com Consultor no WhatsApp</a>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
