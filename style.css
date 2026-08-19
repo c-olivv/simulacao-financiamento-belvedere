@@ -15,24 +15,18 @@ body {
     padding: 30px 20px;
 }
 
-/* Layout responsivo em 2 colunas */
+/* Layout vertical único em todas as resoluções */
 .page-layout {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 30px;
-    max-width: 1200px;
+    max-width: 800px; /* Largura otimizada para leitura em coluna única */
     width: 100%;
 }
 
-@media (max-width: 900px) {
-    .page-layout {
-        flex-direction: column;
-    }
-}
-
-/* Coluna da Esquerda: Imóvel */
+/* Seção do Imóvel */
 .property-info {
-    flex: 1.2;
+    width: 100%;
     background: #ffffff;
     padding: 25px;
     border-radius: 10px;
@@ -54,8 +48,7 @@ body {
 .carousel-container {
     position: relative;
     width: 100%;
-    max-width: 800px;
-    height: 400px; /* Altura fixa padronizada */
+    height: 400px;
     margin-bottom: 20px;
     border-radius: 10px;
     overflow: hidden;
@@ -77,11 +70,11 @@ body {
 .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Padroniza o tamanho cortando o excesso sem distorcer */
+    object-fit: cover;
     cursor: pointer;
 }
 
-/* Botões do Carrosel */
+/* Botões do Carrossel */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -104,7 +97,7 @@ body {
 .carousel-btn.prev { left: 15px; }
 .carousel-btn.next { right: 15px; }
 
-/* Indicadores de bolinha */
+/* Indicadores */
 .carousel-dots {
     position: absolute;
     bottom: 12px;
@@ -127,7 +120,7 @@ body {
     transform: scale(1.2);
 }
 
-/* Modal de Expansão (Lightbox) */
+/* Modal / Lightbox */
 .modal {
     display: none;
     position: fixed;
@@ -158,31 +151,11 @@ body {
     cursor: pointer;
 }
 
-/* Adaptativo para telas pequenas */
+/* Ajustes do Carrossel para telas menores */
 @media (max-width: 600px) {
     .carousel-container {
         height: 260px;
     }
-}
-
-.featured-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.thumbnail-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.thumbnail-grid img {
-    width: 100%;
-    border-radius: 6px;
-    cursor: pointer;
 }
 
 .subtitle {
@@ -220,16 +193,14 @@ body {
     margin-bottom: 0;
 }
 
-/* Coluna da Direita: Formulário */
+/* Seção do Formulário de Simulação */
 .container {
-    flex: 1;
+    width: 100%;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     padding: 25px;
-    position: sticky;
-    top: 20px;
-    height: fit-content;
+    position: static;
 }
 
 h2 {
@@ -273,6 +244,13 @@ input:focus, select:focus {
     flex: 1;
 }
 
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
 button.btn-submit {
     width: 100%;
     background-color: #3182ce;
@@ -303,6 +281,12 @@ button.btn-submit:hover {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-top: 15px;
+}
+
+@media (max-width: 500px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
