@@ -75,7 +75,6 @@ function calcularPrice(valorFinanciado, taxaMensal, prazoMeses) {
 async function processarSimulacao(e) {
     e.preventDefault();
 
-    // Identificação do imóvel e dados de contato
     const imovelElemento = document.getElementById('imovelReferencia');
     const imovelReferencia = imovelElemento ? imovelElemento.value : 'Geral';
 
@@ -83,7 +82,6 @@ async function processarSimulacao(e) {
     const email = document.getElementById('email').value;
     const telefone = document.getElementById('telefone').value;
     
-    // Converte os campos formatados para float
     const renda = converterMoedaParaFloat(document.getElementById('renda').value);
     const valorImovel = converterMoedaParaFloat(document.getElementById('valorImovel').value);
     const valorEntrada = converterMoedaParaFloat(document.getElementById('valorEntrada').value);
@@ -102,7 +100,6 @@ async function processarSimulacao(e) {
     const prazoMeses = prazoAnos * 12;
     const taxaMensal = (taxaAnual / 100) / 12;
 
-    // Encargos acessórios estimados
     const encargoEstimado = (valorFinanciado * 0.00025) + (valorImovel * 0.00005) + 25.00;
 
     let resultado;
@@ -115,11 +112,9 @@ async function processarSimulacao(e) {
     const primeiraParcelaTotal = resultado.primeiraParcela + encargoEstimado;
     const ultimaParcelaTotal = resultado.ultimaParcela + encargoEstimado;
 
-    // Verificação de Comprometimento de Renda (Máximo de 30%)
     const limiteRenda = renda * 0.30;
     const excedeRenda = primeiraParcelaTotal > limiteRenda;
 
-    // Renderização dos Resultados na Tela
     const cardsContainer = document.getElementById('cardsContainer');
     cardsContainer.innerHTML = `
         <div class="card">
@@ -143,7 +138,7 @@ async function processarSimulacao(e) {
     if (entradaAbaixoDoMinimo) {
         cardsContainer.innerHTML += `
             <div style="grid-column: 1 / -1; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px 15px; border-radius: 6px; font-size: 0.9rem; margin-top: 10px;">
-                ⚠️ <strong>Atenção:</strong> A entrada informada (${formatarMoeda(valorEntrada)}) é menor que os 20% recomendados pelas regras bancárias (${formatarMoeda(entradaMinima)}). Fale com nosso consultor no WhatsApp para analisar opções de subsídio, uso do FGTS ou composição de entrada.
+                ⚠️ <strong>Atenção:</strong> A entrada informada (${formatarMoeda(valorEntrada)}) é menor que os 20% recomendados pelas regras bancárias (${formatarMoeda(entradaMinima)}). Fale com nosso consultor no WhatsApp para analisar opções.
             </div>
         `;
     }
@@ -151,22 +146,19 @@ async function processarSimulacao(e) {
     if (excedeRenda) {
         cardsContainer.innerHTML += `
             <div style="grid-column: 1 / -1; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 12px 15px; border-radius: 6px; font-size: 0.9rem; margin-top: 10px;">
-                ⚠️ <strong>Atenção:</strong> A 1ª parcela excede 30% da renda informada (${formatarMoeda(limiteRenda)}). Fale com nosso consultor no WhatsApp para analisar possibilidades de composição de renda.
+                ⚠️ <strong>Atenção:</strong> A 1ª parcela excede 30% da renda informada (${formatarMoeda(limiteRenda)}). Fale com nosso consultor no WhatsApp para verificar composição de renda.
             </div>
         `;
     }
 
-    // Prepara o link do WhatsApp incluindo a referência do imóvel na mensagem
     const mensagemWhatsApp = encodeURIComponent(
-        `Olá! Me chamo ${nome}. Fiz uma simulação para o imóvel "${imovelReferencia}" no valor de ${formatarMoeda(valorImovel)} e gostaria de tirar dúvidas sobre a análise de crédito.`
+        `Olá! Me chamo ${nome}. Fiz uma simulação para o ${imovelReferencia} no valor de ${formatarMoeda(valorImovel)} (Entrada: ${formatarMoeda(valorEntrada)}) e gostaria de prosseguir com a análise.`
     );
     document.getElementById('linkWhatsapp').href = `https://wa.me/5524988114415?text=${mensagemWhatsApp}`;
 
-    // Exibe o bloco de resultados
     document.getElementById('resultado').style.display = 'block';
     document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
 
-    // Envio dos dados para o SheetMonkey (inclui imovelReferencia)
     const dadosLead = {
         imovelReferencia: imovelReferencia,
         nome: nome,
@@ -186,19 +178,13 @@ async function processarSimulacao(e) {
     };
 
     try {
-        const response = await fetch(ENDPOINT_SHEETMONKEY, {
+        await fetch(ENDPOINT_SHEETMONKEY, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosLead)
         });
-
-        if (response.ok) {
-            console.log("Lead salvo no SheetMonkey com o imóvel:", imovelReferencia);
-        } else {
-            console.error("Erro ao enviar dados para o SheetMonkey. Status:", response.status);
-        }
     } catch (err) {
-        console.error("Erro de rede ao salvar lead:", err);
+        console.error("Erro ao salvar lead:", err);
     }
 }
 
@@ -211,7 +197,12 @@ document.addEventListener('DOMContentLoaded', () => {
     camposMoeda.forEach(id => {
         const input = document.getElementById(id);
         if (input) {
-            input.type = 'text';
+            // Se já contiver valor no HTML, aplica a formatação logo na carga
+            if (input.value && !input.value.startsWith('R$')) {
+                // Caso venha numérico puro
+                let num = parseFloat(input.value) || 0;
+                input.value = num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            }
             input.addEventListener('input', (e) => aplicarMascaraMoeda(e.target));
         }
     });
