@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Financiamento Imobiliário</title>
+    <title>Simulador - Casas Belvedere</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h2>Simulador de Financiamento</h2>
+    <h2>Casas Belvedere (R$ 750k)</h2>
     
     <form id="formSimulacao" onsubmit="processarSimulacao(event)">
-        <!-- CAMPO OCULTO: Altere o value para o nome do imóvel/empreendimento específico -->
+        <!-- Identificador enviado automaticamente para o SheetMonkey -->
         <input type="hidden" id="imovelReferencia" value="Casas Belvedere 750k">
 
         <div class="form-group">
@@ -38,14 +38,16 @@
             </div>
             <div class="form-group">
                 <label for="valorImovel">Valor do Imóvel (R$)</label>
-                <input type="text" id="valorImovel" required placeholder="R$ 0,00">
+                <!-- Valor fixo do imóvel de R$ 750.000,00 (readonly para evitar alterações erradas) -->
+                <input type="text" id="valorImovel" value="R$ 750.000,00" readonly style="background-color: #edf2f7; cursor: not-allowed;">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label for="valorEntrada">Valor da Entrada (R$)</label>
-                <input type="text" id="valorEntrada" required placeholder="R$ 0,00">
+                <!-- Sugestão inicial de 20% (R$ 150.000,00), editável pelo cliente -->
+                <input type="text" id="valorEntrada" value="R$ 150.000,00" required>
             </div>
             <div class="form-group">
                 <label for="prazoAnos">Prazo (Anos)</label>
@@ -67,7 +69,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn-submit">Simular Agora</button>
+        <button type="submit" class="btn-submit">Simular Financiamento</button>
     </form>
 
     <div id="resultado">
