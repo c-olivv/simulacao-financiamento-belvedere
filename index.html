@@ -10,23 +10,48 @@
 
 <div class="page-layout">
     
-    <!-- SEÇÃO ESQUERDA: Informações do Imóvel e Fotos -->
+    <!-- SEÇÃO ESQUERDA: Informações do Imóvel e Galeria -->
     <main class="property-info">
         <h1 class="main-title">Casas na planta no Jardim Belvedere</h1>
-        
-        <!-- Galeria de Fotos / Imagem Principal -->
-        <div class="gallery-container">
-            <img src="images/fachada.png" alt="Fachada Casas Belvedere" class="featured-image">
-            <div class="thumbnail-grid">
-                <img src="images/living.png" alt="Foto Living">
-                <img src="images/lazer.png" alt="Foto Lazer">
-                <img src="images/suite.png" alt="Foto Suíte">
+    
+        <!-- CARROSSEL DE FOTOS -->
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Adicione quantas imagens desejar mantendo a estrutura abaixo -->
+                <div class="carousel-slide">
+                    <img src="images/living.png" alt="Living" onclick="abrirModal(this.src)">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/suite.png" alt="Suíte" onclick="abrirModal(this.src)">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/lazer.png" alt="Lazer" onclick="abrirModal(this.src)">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/cozinha.png" alt="Cozinha" onclick="abrirModal(this.src)">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/banheiro.png" alt="Banheiro" onclick="abrirModal(this.src)">
+                </div>
             </div>
+
+            <!-- Botões de Navegação -->
+            <button class="carousel-btn prev" onclick="mudarSlide(-1)">&#10094;</button>
+            <button class="carousel-btn next" onclick="mudarSlide(1)">&#10095;</button>
+            
+            <!-- Indicadores de página -->
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+
+        <!-- MODAL / EXPANSÃO DA IMAGEM -->
+        <div id="imageModal" class="modal" onclick="fecharModal()">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="imgModalExpanded">
         </div>
 
         <div class="highlight-box">
             <p class="subtitle">Garanta acesso antecipado com exclusividade a este empreendimento:</p>
-            
+        
             <ul class="features-list">
                 <li>📐 <strong>137 m²</strong> de área construída com arquitetura contemporânea</li>
                 <li>🛏️ <strong>3 Quartos</strong> (sendo 1 suíte espaçosa)</li>
