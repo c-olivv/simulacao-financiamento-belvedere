@@ -189,31 +189,7 @@ async function processarSimulacao(e) {
 }
 
 // ==========================================
-// VINCULAÇÃO DOS EVENTOS (DOM LOADED)
-// ==========================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    const camposMoeda = ['renda', 'valorImovel', 'valorEntrada'];
-    camposMoeda.forEach(id => {
-        const input = document.getElementById(id);
-        if (input) {
-            // Se já contiver valor no HTML, aplica a formatação logo na carga
-            if (input.value && !input.value.startsWith('R$')) {
-                // Caso venha numérico puro
-                let num = parseFloat(input.value) || 0;
-                input.value = num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            }
-            input.addEventListener('input', (e) => aplicarMascaraMoeda(e.target));
-        }
-    });
-
-    const inputTelefone = document.getElementById('telefone');
-    if (inputTelefone) {
-        inputTelefone.addEventListener('input', (e) => aplicarMascaraTelefone(e.target));
-    }
-    
-// ==========================================
-// LÓGICA DO CARROSSEL E MODAL (CORRIGIDA)
+// LÓGICA DO CARROSSEL E MODAL
 // ==========================================
 
 let slideIndex = 0;
@@ -230,7 +206,6 @@ function inicializarCarrossel() {
     const { slides, track, dotsContainer } = obterElementosCarrossel();
     if (!track || slides.length === 0) return;
     
-    // Gera as bolinhas indicadoras
     if (dotsContainer) {
         dotsContainer.innerHTML = "";
         for (let i = 0; i < slides.length; i++) {
@@ -248,14 +223,11 @@ function atualizarCarrossel() {
     const { slides, track } = obterElementosCarrossel();
     if (!track || slides.length === 0) return;
 
-    // Garante que o índice fique dentro dos limites
     if (slideIndex >= slides.length) slideIndex = 0;
     if (slideIndex < 0) slideIndex = slides.length - 1;
 
-    // Move o trilho de imagens
     track.style.transform = `translateX(-${slideIndex * 100}%)`;
     
-    // Atualiza as bolinhas ativas
     const dots = document.getElementsByClassName("dot");
     for (let i = 0; i < dots.length; i++) {
         dots[i].classList.remove("active");
@@ -265,7 +237,6 @@ function atualizarCarrossel() {
     }
 }
 
-// Declaradas no escopo global para o onclick do HTML encontrar
 window.mudarSlide = function(direcao) {
     const { slides } = obterElementosCarrossel();
     if (slides.length === 0) return;
@@ -300,10 +271,10 @@ window.fecharModal = function() {
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa o carrossel
+    // Inicializa o carrossel na carga da página
     inicializarCarrossel();
 
-    // Outras inicializações (Máscaras de Moeda e Telefone)
+    // Aplica máscaras nos campos numéricos
     const camposMoeda = ['renda', 'valorImovel', 'valorEntrada'];
     camposMoeda.forEach(id => {
         const input = document.getElementById(id);
