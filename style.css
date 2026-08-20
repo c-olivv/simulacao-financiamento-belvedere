@@ -397,6 +397,54 @@ body {
     display: block;
 }
 
+/* Container de Pontos de Interesse */
+.nearby-places {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.nearby-title {
+    font-size: 1.1rem;
+    color: #1a365d;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Layout em Grade Responsiva */
+.nearby-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+/* Card individual do ponto de interesse */
+.nearby-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #f7fafc;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #edf2f7;
+}
+
+.nearby-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.nearby-item strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #2d3748;
+}
+
+.nearby-item p {
+    font-size: 0.8rem;
+    color: #718096;
+    margin: 0;
+}
+
 /* Seção do Formulário de Simulação */
 .container {
     width: 100%;
