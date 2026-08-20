@@ -128,20 +128,56 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
+.property-header {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0; /* Separação sutil do carrossel */
+    text-align: center;
+}
+
 .main-title {
     font-size: 1.8rem;
     color: #1a365d;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     line-height: 1.2;
     text-align: center;
 }
 
 .main-subtitle {
     font-size: 1rem;
-    color: #4a5568;
+    color: #718096;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     font-weight: 500;
+}
+
+/* Container dos Badges */
+.property-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Estilo individual do Badge */
+.badge {
+    background-color: #edf2f7;
+    color: #2b6cb0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+@media (max-width: 480px) {
+    .badge {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
 }
 
 /* ==========================================
