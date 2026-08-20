@@ -63,28 +63,15 @@
     <div class="gallery-section" id="galeria">
         <h2 class="section-title">Galeria</h2>
 
-        <!-- CARROSSEL DE FOTOS -->
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-                <div class="carousel-slide">
-                    <img src="images/living.png" alt="Living" onclick="abrirModal(this.src)">
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/suite.png" alt="Suíte" onclick="abrirModal(this.src)">
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/lazer.png" alt="Lazer" onclick="abrirModal(this.src)">
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/cozinha.png" alt="Cozinha" onclick="abrirModal(this.src)">
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/banheiro.png" alt="Banheiro" onclick="abrirModal(this.src)">
-                </div>
-                <div class="carousel-slide">
-                    <img src="images/planta.png" alt="planta" onclick="abrirModal(this.src)">
-                </div>
-            </div>
+       <!-- Deixe a estrutura do carrossel exatamente assim (sem espaços entre as divs de slide): -->
+<div class="carousel-track" id="carouselTrack">
+    <div class="carousel-slide"><img src="images/living.png" alt="Living" onclick="abrirModal(this.src)"></div><!--
+    --><div class="carousel-slide"><img src="images/suite.png" alt="Suíte" onclick="abrirModal(this.src)"></div><!--
+    --><div class="carousel-slide"><img src="images/lazer.png" alt="Lazer" onclick="abrirModal(this.src)"></div><!--
+    --><div class="carousel-slide"><img src="images/cozinha.png" alt="Cozinha" onclick="abrirModal(this.src)"></div><!--
+    --><div class="carousel-slide"><img src="images/banheiro.png" alt="Banheiro" onclick="abrirModal(this.src)"></div><!--
+    --><div class="carousel-slide"><img src="images/planta.png" alt="Planta" onclick="abrirModal(this.src)"></div>
+</div>
 
             <!-- Botões de Navegação -->
             <button class="carousel-btn prev" onclick="mudarSlide(-1)">&#10094;</button>
