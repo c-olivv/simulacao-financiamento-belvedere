@@ -368,6 +368,35 @@ body {
     margin-bottom: 0;
 }
 
+/* Subseção Dedicada à Localização */
+.location-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.location-address {
+    font-size: 1rem;
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.map-container {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 250px;
+    display: block;
+}
+
 /* Seção do Formulário de Simulação */
 .container {
     width: 100%;
