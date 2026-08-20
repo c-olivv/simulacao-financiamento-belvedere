@@ -8,16 +8,39 @@
 </head>
 <body>
 
+<!-- CABEÇALHO FIXO -->
+<header class="navbar">
+    <div class="navbar-container">
+        <!-- Espaço para a Logo -->
+        <a href="#" class="logo-area">
+            <!-- Substitua o src pelo caminho da sua imagem/logo futuramente -->
+            <img src="https://via.placeholder.com/150x40?text=Sua+Logo" alt="Logo" id="siteLogo">
+        </a>
+
+        <!-- Menu Suspenso (Dropdown) -->
+        <nav class="nav-dropdown">
+            <button class="dropdown-btn">
+                Menu ☰
+            </button>
+            <div class="dropdown-content">
+                <a href="#imovel">O Imóvel</a>
+                <a href="#galeria">Galeria</a>
+                <a href="#detalhes">Diferenciais</a>
+                <a href="#simulador">Simulador</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
 <div class="page-layout">
     
     <!-- SEÇÃO ESQUERDA: Informações do Imóvel e Galeria -->
-    <main class="property-info">
+    <main class="property-info" id="imovel">
         <h1 class="main-title">Casas na planta no Jardim Belvedere</h1>
     
         <!-- CARROSSEL DE FOTOS -->
-        <div class="carousel-container">
+        <div class="carousel-container" id="galeria">
             <div class="carousel-track" id="carouselTrack">
-                <!-- Adicione quantas imagens desejar mantendo a estrutura abaixo -->
                 <div class="carousel-slide">
                     <img src="images/fachada.png" alt="Fachada" onclick="abrirModal(this.src)">
                 </div>
@@ -52,7 +75,7 @@
             <img class="modal-content" id="imgModalExpanded">
         </div>
 
-        <div class="highlight-box">
+        <div class="highlight-box" id="detalhes">
             <p class="subtitle">Garanta acesso antecipado com exclusividade a este empreendimento:</p>
         
             <ul class="features-list">
@@ -73,7 +96,7 @@
     </main>
 
     <!-- SEÇÃO DIREITA: Formulário de Simulação -->
-    <aside class="container">
+    <aside class="container" id="simulador">
         <h2>Simulador de Financiamento</h2>
         
         <form id="formSimulacao" onsubmit="processarSimulacao(event)">
