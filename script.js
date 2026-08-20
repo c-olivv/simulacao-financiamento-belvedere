@@ -291,4 +291,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (inputTelefone) {
         inputTelefone.addEventListener('input', (e) => aplicarMascaraTelefone(e.target));
     }
+
+// ==========================================
+// SUPORTE A GESTOS (SWIPE) NO CARROSSEL
+// ==========================================
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+const carouselTrack = document.getElementById('carouselTrack');
+
+if (carouselTrack) {
+    carouselTrack.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carouselTrack.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        tratarSwipe();
+    }, { passive: true });
+}
+
+function tratarSwipe() {
+    const limiteMinimo = 50; // Distância mínima em pixels para considerar swipe
+    
+    // Deslizou para a esquerda (próximo slide)
+    if (touchStartX - touchEndX > limiteMinimo) {
+        mudarSlide(1);
+    }
+    
+    // Deslizou para a direita (slide anterior)
+    if (touchEndX - touchStartX > limiteMinimo) {
+        mudarSlide(-1);
+    }
+}
 });
