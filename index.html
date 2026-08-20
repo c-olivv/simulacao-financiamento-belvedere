@@ -33,24 +33,33 @@
 
 <div class="page-layout">
     
-   <!-- SEÇÃO ESQUERDA: Informações do Imóvel e Galeria -->
-    <main class="property-info" id="imovel">
-        <!-- Cabeçalho do Imóvel -->
-        <div class="property-header">
-            <h1 class="main-title">Casas na planta no Jardim Belvedere</h1>
-            <p class="main-subtitle">Seu novo endereço está tomando forma</p>
+<!-- SEÇÃO ESQUERDA: Informações do Imóvel e Galeria -->
+<main class="property-info" id="imovel">
+    <!-- Cabeçalho do Imóvel -->
+    <div class="property-header">
+        <h1 class="main-title">Casas na planta no Jardim Belvedere</h1>
+        <p class="main-subtitle">Seu novo endereço está tomando forma</p>
         
-            <!-- Badges de Informações Rápidas -->
-            <div class="property-badges">
-                <span class="badge">📐 137 m²</span>
-                <span class="badge">🛏️ 3 quartos</span>
-                <span class="badge">🚿 1 suíte</span>
-                <span class="badge">🚗 2 vagas</span>
-            </div>
+        <!-- Badges de Informações Rápidas -->
+        <div class="property-badges">
+            <span class="badge">📐 137 m²</span>
+            <span class="badge">🛏️ 3 quartos</span>
+            <span class="badge">🚿 1 suíte</span>
+            <span class="badge">🚗 2 vagas</span>
         </div>
-    
+
+        <!-- Foto de Destaque Fixa -->
+        <div class="featured-photo-container">
+            <img src="images/fachada.png" alt="Fachada do Imóvel" class="featured-photo" onclick="abrirModal(this.src)">
+        </div>
+    </div>
+
+    <!-- SEÇÃO DA GALERIA -->
+    <div class="gallery-section" id="galeria">
+        <h2 class="section-title">Galeria de Fotos</h2>
+
         <!-- CARROSSEL DE FOTOS -->
-        <div class="carousel-container" id="galeria">
+        <div class="carousel-container">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide">
                     <img src="images/fachada.png" alt="Fachada" onclick="abrirModal(this.src)">
@@ -79,32 +88,33 @@
             <!-- Indicadores de página -->
             <div class="carousel-dots" id="carouselDots"></div>
         </div>
+    </div>
 
-        <!-- MODAL / EXPANSÃO DA IMAGEM -->
-        <div id="imageModal" class="modal" onclick="fecharModal()">
-            <span class="close-modal">&times;</span>
-            <img class="modal-content" id="imgModalExpanded">
+    <!-- MODAL / EXPANSÃO DA IMAGEM -->
+    <div id="imageModal" class="modal" onclick="fecharModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="imgModalExpanded">
+    </div>
+
+    <div class="highlight-box" id="detalhes">
+        <p class="subtitle">Garanta acesso antecipado com exclusividade a este empreendimento:</p>
+    
+        <ul class="features-list">
+            <li>📐 <strong>137 m²</strong> de área construída com arquitetura contemporânea</li>
+            <li>🛏️ <strong>3 Quartos</strong> (sendo 1 suíte espaçosa)</li>
+            <li>🥩 <strong>Espaço Gourmet</strong> integrado com churrasqueira (perfeito para receber)</li>
+            <li>🚗 <strong>Garagem</strong> para 2 veículos</li>
+            <li>☀️ <strong>Excelente iluminação natural</strong> e ventilação</li>
+            <li>❄️ <strong>Preparação/Infraestrutura</strong> pronta para ar-condicionado</li>
+            <li>💎 <strong>Acabamentos premium</strong> e design funcional</li>
+        </ul>
+
+        <div class="location-status">
+            <p>📍 <strong>Localização:</strong> Jardim Belvedere</p>
+            <p>🏗️ <strong>Status:</strong> Em obras (Entrega: Outubro/26)</p>
         </div>
-
-        <div class="highlight-box" id="detalhes">
-            <p class="subtitle">Garanta acesso antecipado com exclusividade a este empreendimento:</p>
-        
-            <ul class="features-list">
-                <li>📐 <strong>137 m²</strong> de área construída com arquitetura contemporânea</li>
-                <li>🛏️ <strong>3 Quartos</strong> (sendo 1 suíte espaçosa)</li>
-                <li>🥩 <strong>Espaço Gourmet</strong> integrado com churrasqueira (perfeito para receber)</li>
-                <li>🚗 <strong>Garagem</strong> para 2 veículos</li>
-                <li>☀️ <strong>Excelente iluminação natural</strong> e ventilação</li>
-                <li>❄️ <strong>Preparação/Infraestrutura</strong> pronta para ar-condicionado</li>
-                <li>💎 <strong>Acabamentos premium</strong> e design funcional</li>
-            </ul>
-
-            <div class="location-status">
-                <p>📍 <strong>Localização:</strong> Jardim Belvedere</p>
-                <p>🏗️ <strong>Status:</strong> Em obras (Entrega: Outubro/26)</p>
-            </div>
-        </div>
-    </main>
+    </div>
+</main>
 
     <!-- SEÇÃO DIREITA: Formulário de Simulação -->
     <aside class="container" id="simulador">
