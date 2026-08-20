@@ -40,6 +40,10 @@
     <div class="property-header">
         <h1 class="main-title">Casas na planta no Jardim Belvedere</h1>
         <p class="main-subtitle">Seu novo endereço está tomando forma</p>
+
+    <div style="background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-align: center; margin-bottom: 15px;">
+        🔥 Últimas unidades com tabela de pré-lançamento
+    </div>
         
         <!-- Badges de Informações Rápidas -->
         <div class="property-badges">
@@ -172,6 +176,9 @@
     <!-- SEÇÃO DIREITA: Formulário de Simulação -->
     <aside class="container" id="simulador">
         <h2>Simulador de Financiamento</h2>
+        <p style="text-align: center; color: #718096; font-size: 0.9rem; margin-bottom: 20px;">
+            Descubra o valor das parcelas e veja as condições de entrada para o seu perfil.
+        </p>
         
         <form id="formSimulacao" onsubmit="processarSimulacao(event)">
             <input type="hidden" id="imovelReferencia" value="Casas Belvedere 750k">
@@ -228,7 +235,10 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit">Simular Financiamento</button>
+            <button type="submit" class="btn-submit">Calcular Minhas Parcelas</button>
+            <p style="font-size: 0.75rem; color: #a0aec0; text-align: center; margin-top: 10px;">
+                🔒 Seus dados estão seguros. Não enviamos spam.
+            </p>
         </form>
 
         <div id="resultado">
