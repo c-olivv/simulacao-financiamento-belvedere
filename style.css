@@ -648,6 +648,7 @@ button.btn-submit:hover {
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px dashed #cbd5e0;
+    text-align: center;
 }
 
 .conditions-list {
