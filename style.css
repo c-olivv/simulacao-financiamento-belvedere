@@ -468,7 +468,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 75%; /* Ajusta o tamanho da logo dentro da caixa */
-    opacity: 0.05;         /* Transparência bem sutil (5% de opacidade) */
+    opacity: 0.1;         /* Transparência bem sutil (5% de opacidade) */
     pointer-events: none;  /* Impede que a imagem interfira nos cliques do formulário */
     z-index: 0;
 }
